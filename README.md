@@ -12,11 +12,12 @@ You can find a quick guide in the following [cheat sheet](https://www.markdowngu
 
 # Title of the project
 
-by: Names of the authors
+by: *Names of the authors*
 
 
-Faculty of Technology and Bionics
-Rhine-Waal University of Applied Sciences
+**Faculty of Technology and Bionics**
+
+***Rhine-Waal University of Applied Sciences***
 
 Date: XX January 2022
 
@@ -26,7 +27,7 @@ Date: XX January 2022
 
 Short summary of the project and the work conducted
 
-## Contents
+## Table of Contents
 
 [[_TOC_]]
 
@@ -58,6 +59,15 @@ def function():
     s = "Python code"
     print s
 ```
+
+Example how to draw a table:
+
+| Left Aligned | Centered | Right Aligned |
+| :---         | :---:    | ---:          |
+| Cell 1       | Cell 2   | Cell 3        |
+| Cell 4       | Cell 5   | Cell 6        |
+| OpAmp 741    | 2        | 1.00          |
+
 
 ## 5	Results
 Here you should present your results.
