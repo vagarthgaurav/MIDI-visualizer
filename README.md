@@ -1,11 +1,11 @@
-{::options parse_block_html="true" /}
-
-# Project-Template
-{:.no_toc}
+>>>
+**Project-Template**
 
 Please use this template for your practical electronics project. (feel free to delete this section) 
+
 You can find a quick guide in the following [cheat sheet](https://www.markdownguide.org/cheat-sheet/) or specific [gitlab style](https://docs.gitlab.com/ee/user/markdown.html) here
-{: .alert .alert-gitlab-orange}
+
+>>>
 
 
 ----
@@ -51,8 +51,21 @@ This math is inline $`a^2+b^2=c^2`$.
 How was your approach to solve the given problem/task.
 This will include descriptions of the HW used as well as the SW.
 
+This is an example how to include code snippet:
+```python
+def function():
+    #indenting works just fine in the fenced code block
+    s = "Python code"
+    print s
+```
+
 ## 5	Results
 Here you should present your results.
+
+This is an example how to include image:
+![alt text](resources/Open_Source_Hardware_(OSHW)_Logo_on_blank_PCB.jpg "Example Image")
+(C) Altzone, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons
+
 
 ## 6	Discussion
 Here you should discuss your results
