@@ -4,6 +4,7 @@ Please use this template for your practical electronics project. (feel free to d
 You can find a quick guide in the following [cheat sheet](https://www.markdownguide.org/cheat-sheet/) or specific [gitlab style](https://about.gitlab.com/handbook/markdown-guide/) here
 
 ----
+
 # Title of the project
 {:.no_toc}
 
@@ -16,6 +17,7 @@ Rhine-Waal University of Applied Sciences
 Date:
 
 ----
+
 ## Abstract
 {:toc}
 
