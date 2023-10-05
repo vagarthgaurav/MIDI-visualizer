@@ -7,6 +7,8 @@ You can find a quick guide in the following [cheat sheet](https://www.markdowngu
 
 >>>
 
+**Make sure your submit your deliverables (project description, schematic, pcb design and report on time - timestamp is used as reference)
+
 
 ----
 
