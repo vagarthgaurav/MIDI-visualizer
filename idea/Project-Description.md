@@ -12,23 +12,25 @@ The brains of the PCB would be a MCU like an STM32 or ATmel chip. The input woul
 Optionally there could be a passthrough for daisy chaining other MIDI devices. 
 
 ## Components
-See basic circuit reference images in "/idea" folder.
+See basic circuit reference images in the "/idea" folder.
 
 Resistors, assuming 5v in the main circuit: 
-x4 220 Ohm resistor
-x1 4.7k Ohm resistor
+- x4 220 Ohm resistor
+- x1 4.7k Ohm resistor
 
-x2 Midi connectors, female
-x1 1N914 Diode
-x1 6N138 Optoisolator
-x2 OpAmp (For the midi through)
-x1 Linear regulator
+- x2 Midi connectors, female
+- x1 1N914 Diode
+- x1 6N138 Optoisolator
+- x2 OpAmp (For the midi through)
+- x1 Linear regulator
 
-x1 MCU, are there any good 5v options, or should we stick with 3.2?
+- x1 MCU, 5v or 3.2v? Preferably with USB support.
 
-1600-2400mm LED Strip - Neopixel or similar, might need to simplify or look for alternatives, those dimensions of the Neopixel strip are out of our budget
+- 1600-2400mm LED Strip - Neopixel or similar. 
+*Might need to simplify or look for alternatives, those dimensions of the Neopixel strip are out of our budget.*
 
-??v power-source, probably a laptop brick or similar
+- ??v power-source. 
+*Probably can use a laptop brick or similar.*
 
 ## Further research
 
