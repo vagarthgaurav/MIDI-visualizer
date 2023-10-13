@@ -24,6 +24,7 @@ Resistor values assume 5v in the main circuit.
 - x1 6N138 Optoisolator
 - x2 OpAmp (For the midi through)
 - x1 Linear regulator (e.g LM7805)
+- x2 0.1 - 1 uF Capacitors. *For the linear regulator. Check specific regulator datasheet.*
 
 - x1 MCU, 5v or 3.2v? Preferably with USB support.
 
