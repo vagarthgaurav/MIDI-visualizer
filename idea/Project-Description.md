@@ -1,7 +1,7 @@
 # Midi keyboard visualizer.
 
 ## Concept
-A dynamic midi-driven visualizer that translates an incoming midi signal into dynamic patterns on a rudimantary LED screen made of multiple rows of a neopixel LED strip. 
+A dynamic midi-driven visualizer that translates an incoming MIDI signal into visual patterns on a rudimantary LED screen made of multiple rows of neopixel LED strip. 
 
 ## Overview of design 
 
@@ -14,7 +14,8 @@ Optionally there could be a passthrough for daisy chaining other MIDI devices.
 ## Components
 See basic circuit reference images in the "/idea" folder.
 
-Resistors, assuming 5v in the main circuit: 
+Resistor values assume 5v in the main circuit.
+
 - x4 220 Ohm resistor
 - x1 4.7k Ohm resistor
 
