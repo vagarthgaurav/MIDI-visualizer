@@ -27,6 +27,8 @@ Resistor values assume 5v in the main circuit.
 - x2 0.1 - 1 uF Capacitors. *For the linear regulator. Check specific regulator datasheet.*
 
 - x1 MCU, 5v or 3.2v? Preferably with USB support.
+- Components required by the MCU, if any.
+- MCU programming board
 
 - 1600-2400mm LED Strip - Neopixel or similar. 
 *Might need to simplify or look for alternatives, those dimensions of the Neopixel strip are out of our budget.*
