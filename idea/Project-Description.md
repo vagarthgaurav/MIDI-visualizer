@@ -23,10 +23,12 @@ Resistor values assume 5v in the main circuit.
 - x1 1N914 Diode
 - x1 6N138 Optoisolator
 - x2 OpAmp (For the midi through)
-- x1 Linear regulator (e.g LM7805)
+- x1 Buck convertor 12V-3.3V LM2675N-3.3/NOPB
+- (!cant find this) x1 100uH inductor (see convertor datasheet table 2. e.g Pulse engineering PE-53811, renco RL-5470-5)
+- x1 Convertor output capacitor (see table 3), eg Nichicon pl 120/35 or panasonic hfq 120/35
 - x2 0.1 - 1 uF Capacitors. *For the linear regulator. Check specific regulator datasheet.*
 
-- x1 MCU, 5v or 3.2v? Preferably with USB support.
+- Atmega328PU (3.3V)
 - Components required by the MCU, if any.
 - MCU programming board
 
@@ -42,6 +44,10 @@ Specified above are rought outlines, to narrow them down we need to decide/resea
 - Input voltage of the LED strips available in the lab
 - Operational voltage of the MCU
 - Specifications of our power source
+
+## Links
+Convertor - https://www.mouser.de/ProductDetail/Texas-Instruments/LM2675N-3.3-NOPB?qs=X1J7HmVL2ZGRiUKR0DT9lg%3D%3D
+Convertor output capacitor https://www.mouser.de/ProductDetail/Panasonic/EEU-FC1V121BJ?qs=MtOUKumLmnbfkV83WLYzhA%3D%3D
 
 
 ## Block diagram
