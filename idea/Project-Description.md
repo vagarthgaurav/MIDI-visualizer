@@ -18,25 +18,23 @@ Resistor values assume 5v in the main circuit.
 
 - x4 220 Ohm resistor
 - x1 4.7k Ohm resistor
-
 - x2 Midi connectors, female
 - x1 1N914 Diode
 - x1 6N138 Optoisolator
-- x2 OpAmp (For the midi through)
-- x1 Buck convertor 12V-3.3V LM2675N-3.3/NOPB
-- (!cant find this) x1 100uH inductor (see convertor datasheet table 2. e.g Pulse engineering PE-53811, renco RL-5470-5)
-- x1 Convertor output capacitor (see table 3), eg Nichicon pl 120/35 or panasonic hfq 120/35
-- x2 0.1 - 1 uF Capacitors. *For the linear regulator. Check specific regulator datasheet.*
+- x2 ???OpAmp (For the midi through)
+- x1 Buck convertor 12V-3.3V LLM2574-3.3YN
+- x1 330uH inductor
+- x1 Schottky Diode 11DQ05
+- x1 22uF capacitor 
+- x1 220uF capacitor
 
 - Atmega328PU (3.3V)
-- Components required by the MCU, if any.
+- ???Components required by the MCU, if any.
 - MCU programming board
 
-- 1600-2400mm LED Strip - Neopixel or similar. 
-*Might need to simplify or look for alternatives, those dimensions of the Neopixel strip are out of our budget.*
+- 12V LED strip WS2811 
 
-- ??v power-source. 
-*Probably can use a laptop brick or similar.*
+- 12V 5A Power block (already have it)
 
 ## Further research
 
@@ -46,8 +44,9 @@ Specified above are rought outlines, to narrow them down we need to decide/resea
 - Specifications of our power source
 
 ## Links
-Convertor - https://www.mouser.de/ProductDetail/Texas-Instruments/LM2675N-3.3-NOPB?qs=X1J7HmVL2ZGRiUKR0DT9lg%3D%3D
-Convertor output capacitor https://www.mouser.de/ProductDetail/Panasonic/EEU-FC1V121BJ?qs=MtOUKumLmnbfkV83WLYzhA%3D%3D
+Convertor - https://www.mouser.de/ProductDetail/Microchip-Technology/LM2574-3.3YN?qs=kh6iOki%2FeLFm%2F7QjFwBwAg%3D%3D
+Schottky - https://www.mouser.de/ProductDetail/Vishay-General-Semiconductor/SB150-E3-73?qs=u91jd7aysvNh88d3MDclzw%3D%3D
+
 
 
 ## Block diagram
