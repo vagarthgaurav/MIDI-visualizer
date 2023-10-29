@@ -22,13 +22,13 @@ Resistor values assume 5v in the main circuit.
 - x1 1N914 Diode
 - x1 6N138 Optoisolator
 - x2 ???OpAmp (For the midi through)
-- x1 Buck convertor 12V-3.3V LLM2574-3.3YN
+- x1 Buck convertor 12V-5V LLM2574-5YN
 - x1 330uH inductor
 - x1 Schottky Diode 11DQ05
 - x1 22uF capacitor 
 - x1 220uF capacitor
 
-- Atmega328PU (3.3V)
+- Atmega328PU (5V)
 - ???Components required by the MCU, if any.
 - MCU programming board
 
@@ -44,8 +44,12 @@ Specified above are rought outlines, to narrow them down we need to decide/resea
 - Specifications of our power source
 
 ## Links
-Convertor - https://www.mouser.de/ProductDetail/Microchip-Technology/LM2574-3.3YN?qs=kh6iOki%2FeLFm%2F7QjFwBwAg%3D%3D
+Convertor - https://www.mouser.de/ProductDetail/Microchip-Technology/LM2574-5.0YN?qs=kh6iOki%2FeLG8tRVzGWSPaw%3D%3D
 Schottky - https://www.mouser.de/ProductDetail/Vishay-General-Semiconductor/SB150-E3-73?qs=u91jd7aysvNh88d3MDclzw%3D%3D
+x2 Midi jack - https://www.mouser.de/ProductDetail/Adafruit/1134?qs=GURawfaeGuCcC0%252BrNLxslQ%3D%3D
+Zener 1N914 - https://www.mouser.de/ProductDetail/Microchip-Technology/1N914?qs=sGAEpiMZZMtbRapU8LlZD%252BA5DEGXpsCFq1gdTANLUHGIG3gOyABNgg%3D%3D
+Optocoupler, SMD for production - https://www.mouser.de/ProductDetail/Lite-On/6N138S?qs=PByDJ0nQNwpiJNZ8Mk8Kdw%3D%3D
+Optocoupler, Through-hole for prototyping - https://www.mouser.de/ProductDetail/Lite-On/6N138?qs=PByDJ0nQNwrHY388gp7wNw%3D%3D
 
 
 
