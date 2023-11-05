@@ -118,11 +118,11 @@
         )
       )
     )
-    (symbol "power:+5V" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (symbol "power:+12V" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Value" "+5V" (at 0 3.556 0)
+      (property "Value" "+12V" (at 0 3.556 0)
         (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (at 0 0 0)
@@ -134,10 +134,10 @@
       (property "ki_keywords" "global power" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Power symbol creates a global label with name \"+5V\"" (at 0 0 0)
+      (property "ki_description" "Power symbol creates a global label with name \"+12V\"" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "+5V_0_1"
+      (symbol "+12V_0_1"
         (polyline
           (pts
             (xy -0.762 1.27)
@@ -163,9 +163,9 @@
           (fill (type none))
         )
       )
-      (symbol "+5V_1_1"
+      (symbol "+12V_1_1"
         (pin power_in line (at 0 0 90) (length 0) hide
-          (name "+5V" (effects (font (size 1.27 1.27))))
+          (name "+12V" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
       )
@@ -488,7 +488,7 @@
     (uuid f72eb7ff-4c5f-472b-9903-c44ac1d96cc0)
   )
 
-  (rectangle (start 21.59 20.32) (end 248.92 78.74)
+  (rectangle (start 17.78 20.32) (end 248.92 78.74)
     (stroke (width 0) (type dot))
     (fill (type none))
     (uuid 99dd9969-487d-41f0-802b-0c89f0a5c6f7)
@@ -606,6 +606,34 @@
         )
         (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
           (reference "D19") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+12V") (at 237.49 25.4 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 1b7428fe-09c2-405d-a40c-e7b9302d77b8)
+    (property "Reference" "#PWR07" (at 237.49 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+12V" (at 234.95 21.59 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 237.49 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 237.49 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 4babc0d9-ac9b-491e-878f-de1af4d511e2))
+    (instances
+      (project "Practical Electronics WS2023"
+        (path "/f943c676-85fb-4e53-8b92-69bf16728faf"
+          (reference "#PWR07") (unit 1)
+        )
+        (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
+          (reference "#PWR05") (unit 1)
         )
       )
     )
@@ -825,34 +853,6 @@
     )
   )
 
-  (symbol (lib_id "power:+5V") (at 237.49 54.61 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 8575c7e0-7a7e-4a3e-b7fb-310d9886a3d6)
-    (property "Reference" "#PWR013" (at 237.49 58.42 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+5V" (at 237.49 50.8 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "" (at 237.49 54.61 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 237.49 54.61 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 859be268-561a-4ec0-9895-8991dbc0aec9))
-    (instances
-      (project "Practical Electronics WS2023"
-        (path "/f943c676-85fb-4e53-8b92-69bf16728faf"
-          (reference "#PWR013") (unit 1)
-        )
-        (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
-          (reference "#PWR09") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "LED:WS2812B") (at 149.86 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8bd3df3c-8aa3-46cf-bfb6-0266efa210c3)
@@ -879,34 +879,6 @@
         )
         (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
           (reference "D15") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+5V") (at 237.49 25.4 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 9f487b70-10c0-4e6c-8fb6-78e34ee5f9e2)
-    (property "Reference" "#PWR012" (at 237.49 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+5V" (at 237.49 21.59 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "" (at 237.49 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 237.49 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid ab559824-1e3f-4cd4-b173-f1d21fc5748d))
-    (instances
-      (project "Practical Electronics WS2023"
-        (path "/f943c676-85fb-4e53-8b92-69bf16728faf"
-          (reference "#PWR012") (unit 1)
-        )
-        (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
-          (reference "#PWR06") (unit 1)
         )
       )
     )
@@ -1000,6 +972,34 @@
         )
         (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
           (reference "D3") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+12V") (at 237.49 54.61 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid b8f8454b-7ab7-44bb-8291-6a4fca2b4a4b)
+    (property "Reference" "#PWR07" (at 237.49 58.42 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+12V" (at 234.95 50.8 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 237.49 54.61 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 237.49 54.61 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a65a8bd8-0bec-4b40-a241-303d6632b1ca))
+    (instances
+      (project "Practical Electronics WS2023"
+        (path "/f943c676-85fb-4e53-8b92-69bf16728faf"
+          (reference "#PWR07") (unit 1)
+        )
+        (path "/f943c676-85fb-4e53-8b92-69bf16728faf/20aab1b7-be82-4cca-a2a0-ad787dc38846"
+          (reference "#PWR06") (unit 1)
         )
       )
     )
