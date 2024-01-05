@@ -1,13 +1,14 @@
 #include <MIDI.h>
+#include <SoftwareSerial.h>
 #include "screen.h"
 #include "shape.h"
-#include <SoftwareSerial.h>
 
 // Setting up MIDI suart connection
 SoftwareSerial midiSerial(2, 3);
 MIDI_CREATE_INSTANCE(SoftwareSerial, midiSerial, MIDI);
 
 // Setting up LED screen
+// Using 3, 100, 2 completely hangs arduino for some reason :/
 Screen screen(3, 100, 2);
 
 // Preallocating shapes. Arduino memory is tiny, 20 shapes already put us at an overall 65% memory consumption.
@@ -98,6 +99,7 @@ void setup()
     MIDI.begin(MIDI_CHANNEL_OMNI);
     MIDI.setHandleNoteOn(handleNoteOn);
     MIDI.setHandleNoteOff(handleNoteOff);
+    Serial.println("Listening to note events...");
 
     // Setting up shape animations config, so far these settings do absolutely nothing :)
     // We can change animation behaviour by altering these settings.
@@ -113,6 +115,9 @@ void setup()
 
 void loop()
 {
+    // Need to keep this read() in a loop, otherwise events wont trigger
+    MIDI.read();
+
     // Track time, calculate delta time (dt), loop through all shapes and update them.
     // TO DO: Lock to a reasonable framerate (120hz?)
     auto now = millis();
@@ -129,6 +134,6 @@ void loop()
     }
 
     // Loop through all of the screen pixels and sample all of the objects from each pixel. Mix colors (if pixel belongs to multiple objects), set pixel color.
-    screen.forEach([](AbsPosition absPos, RelPosition relPos)
+    screen.forEach([](const AbsPosition &absPos, const RelPosition &relPos)
                    { Serial.print(relPos.x); Serial.print(" "); Serial.println(relPos.y); });
 }

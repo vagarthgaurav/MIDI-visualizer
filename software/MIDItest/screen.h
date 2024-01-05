@@ -1,7 +1,6 @@
 #ifndef Screen_h
 #define Screen_h
 
-#include "Arduino.h"
 #include "types.h"
 
 class Screen
@@ -12,10 +11,8 @@ public:
         mRows = rows;
         mColumns = columns;
 
-        // Apparently using new on Arduino is frowned upon heavily due to memory fragmentation,
-        // but since we are doing this one only once per entire runtime - it's ok
-        mLedIndices = new int[rows * columns];
-
+        // TO DO: Storing all these indices takes too much space, we will have to do calculate proper index
+        // each time we are trying to adress led instead
         int ledInd = 0;
         for (int r = 0; r < rows; r++)
         {
@@ -28,15 +25,16 @@ public:
         }
     }
 
-    void setPixel(AbsPosition absPos, Color col)
+    void setPixel(const AbsPosition &absPos, Color col)
     {
+        int ledInd = absPositionToIndex(absPos);
+        // Set led color
     }
 
-    void setPixel(float xFrac, float yFrac, byte r, byte g, byte b, byte a)
+    void setPixel(const RelPosition &relPos, Color col)
     {
-        int x = xFrac * (mColumns - 1);
-        int y = yFrac * (mRows - 1);
-        setPixel(x, y, r, g, b, a);
+        auto absPos = relToAbsPosition(relPos);
+        setPixel(absPos, col);
     }
 
     AbsPosition indexToAbsPosition(int i)
@@ -53,7 +51,7 @@ public:
             .y = absPos.y / (mRows - 1)};
     }
 
-    AbsPosition retToAbsPosition(const RelPosition &relPos)
+    AbsPosition relToAbsPosition(const RelPosition &relPos)
     {
         return {
             .x = relPos.x * (mColumns - 1),
@@ -65,7 +63,7 @@ public:
         auto i = mLedIndices[position.y * mColumns + position.x];
     }
 
-    void forEach(void (*fn)(AbsPosition absPos, RelPosition relPos))
+    void forEach(void (*fn)(const AbsPosition &absPos, const RelPosition &relPos))
     {
         int total = mRows * mColumns;
         for (int i = 0; i < total; i++)
@@ -81,6 +79,6 @@ public:
 private:
     int mRows;
     int mColumns;
-    int *mLedIndices;
+    int mLedIndices[1000];
 };
 #endif
