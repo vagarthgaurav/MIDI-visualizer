@@ -8,13 +8,12 @@ SoftwareSerial midiSerial(2, 3);
 MIDI_CREATE_INSTANCE(SoftwareSerial, midiSerial, MIDI);
 
 // Setting up LED screen
-// TO DO: screen.h eats up a lot of space and prevents sketch from working, it should be refactored
 Screen screen(3, 100, 2);
 
 // Preallocating shapes. Arduino memory is tiny, 20 shapes already put us at an overall 65% memory consumption.
 Shape shapes[30];
 
-unsigned long lastTimestamp = 0;
+int refreshRate = 120;
 
 // Utility functions //////////////////
 float noteToFraction(byte note)
@@ -106,38 +105,63 @@ void handleNoteOff(byte channel, byte note, byte velocity)
     digitalWrite(LED_BUILTIN, LOW);
 }
 
+unsigned long lastLoopTime = 0;
+unsigned long framePeriodMs = 1000 / refreshRate;
+
 void loop()
 {
+    // Locking to a reasonable refresh rate
+    auto now = millis();
+    auto loopStartTime = now;
+    if (lastLoopTime == 0)
+        lastLoopTime = now;
+    auto dt = now - lastLoopTime;
+    if (dt < framePeriodMs)
+        return;
+
     // Need to keep this read() in a loop, otherwise events wont trigger
     MIDI.read();
-
-    // Track time, calculate delta time (dt), loop through all shapes and update them.
-    // TO DO: Lock to a reasonable framerate (120hz?)
-    auto now = millis();
-    if (lastTimestamp == 0)
-        lastTimestamp = now;
-
-    auto dt = now - lastTimestamp;
 
     // Update all the shapes
     for (auto shape : shapes)
     {
         if (shape.isActive())
-            shape.updateTick(dt);
+            shape.update(dt);
     }
 
     // Loop through all of the screen pixels and sample all of the objects from each pixel. Mix colors (if pixel belongs to multiple objects), set pixel color.
-    screen.forEach(pixelBrain);
+    screen.perPixelUpdate(pixelBrain);
+
+    auto loopEndTime = millis();
+    lastLoopTime = loopStartTime;
+
+    Serial.print("Performance: frame duration: ");
+    Serial.print(loopEndTime - loopStartTime);
+    Serial.print("ms, frame period: ");
+    Serial.print(dt);
+    Serial.println("ms.");
 }
 
 Color pixelBrain(const AbsPosition &absPos, const RelPosition &relPos)
 {
-    Serial.print(relPos.x);
-    Serial.print(" ");
-    Serial.println(relPos.y);
+    // Serial.print(relPos.x);
+    // Serial.print(" ");
+    // Serial.println(relPos.y);
+
+    Color color = {0, 0, 0, 0};
 
     // TO DO: Sample colors from every object (Hope arduino will be able to handle that), mix colors.
+    for (auto shape : shapes)
+    {
+        if (shape.isActive())
+        {
+            // For now this is simple a color of a last active shape to which this pixel belong
+            auto c = shape.sampleColor(relPos);
+            if (c.a != 0)
+                color = c;
+        }
+    }
 
     // Return pixel color
-    return {0, 0, 0, 0};
+    return color;
 }

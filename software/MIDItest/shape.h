@@ -50,8 +50,9 @@ public:
         mFadingOut = true;
     }
 
-    void updateTick(unsigned long dt)
+    void update(unsigned long dt)
     {
+        // Note: dt is in milliseconds here
         // Runs every update, responsible for animating object properties
         if (mFadingOut)
         {
@@ -66,14 +67,14 @@ public:
         }
     }
 
-    Color sampleColor(float x, float y)
+    Color sampleColor(const RelPosition &relPos)
     {
         // Different shape types can be implemented here
         // Given pixel screen position (in 0 - 1) what is a color of this pixel if it's within this Shape?
         if (sType == ShapeType::COLUMN)
         {
             // Can probably fade out the edges instead of abruptly cutting them
-            if (x >= mPosition.x - mWidth && x <= mPosition.x + mWidth)
+            if (relPos.x >= mPosition.x - mWidth / 2 && relPos.x <= mPosition.x + mWidth / 2)
                 return mColor;
             else
                 return {0, 0, 0, 0};
