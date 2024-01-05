@@ -36,7 +36,7 @@ public:
             mLedIndices[i];
             auto aPos = indexToAbsPosition(i);
             auto rPos = absToRelPosition(aPos);
-            // TO DO: We dont really need ledInd here, but rather and x and y coordinates in 0 - 1.0 range. I.e same as shape Position struct.
+
             auto pixelColor = fn(aPos, rPos);
             setPixel(aPos, pixelColor);
         }
