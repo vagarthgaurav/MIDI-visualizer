@@ -8,7 +8,7 @@ SoftwareSerial midiSerial(2, 3);
 MIDI_CREATE_INSTANCE(SoftwareSerial, midiSerial, MIDI);
 
 // Setting up LED screen
-// Using 3, 100, 2 completely hangs arduino for some reason :/
+// TO DO: screen.h eats up a lot of space and prevents sketch from working, it should be refactored
 Screen screen(3, 100, 2);
 
 // Preallocating shapes. Arduino memory is tiny, 20 shapes already put us at an overall 65% memory consumption.
@@ -46,6 +46,7 @@ void setup()
 
     // Setting up shape animations config, so far these settings do absolutely nothing :)
     // We can change animation behaviour by altering these settings.
+    // TO DO: Store all of these in a single config struct so config presets can be easily swapped.
     Shape::sType = ShapeType::COLUMN;
     Shape::sFadeInDuration = 0.3;
     Shape::sFadeInStartScaleMult = 1.5;
@@ -65,10 +66,6 @@ void handleNoteOn(byte channel, byte note, byte velocity)
     Serial.print("Velocity ON: ");
     Serial.println(velocity);
 
-    // screen.setPixel(noteToFraction(note), 0.0, 1, 1, 1, 1);
-    // screen.setPixel(noteToFraction(note), 0.5, 1, 1, 1, 1);
-    // screen.setPixel(noteToFraction(note), 1.0, 1, 1, 1, 1);
-
     // WARNING: looping through a C array like that or via using sizeof work only if it was statically declared or declared in the same scope,
     // otherwise the length of an array will be unknown and the loop will only iterate over the first element. So dont pass arrays as arguments.
     for (auto shape : shapes)
@@ -76,8 +73,8 @@ void handleNoteOn(byte channel, byte note, byte velocity)
         if (!shape.isActive())
         {
             // Spawn a Shape in a noteToFraction(note) place on the screen.
-            // TO DO: Figure something nice about colors
-            shape.init({noteToFraction(note), 0.0}, 0.2, {1, 1, 1, 1}, note);
+            // TO DO: Figure what we're gonna do with colors
+            shape.init({.x = noteToFraction(note), .y = 0.0}, 0.2, {1, 1, 1, 1}, note);
             return;
         }
     }
@@ -94,15 +91,11 @@ void handleNoteOff(byte channel, byte note, byte velocity)
     Serial.print("Velocity OFF: ");
     Serial.println(velocity);
 
-    // screen.setPixel(noteToFraction(note), 0.0, 0, 0, 0, 1);
-    // screen.setPixel(noteToFraction(note), 0.5, 0, 0, 0, 1);
-    // screen.setPixel(noteToFraction(note), 1.0, 0, 0, 0, 1);
-
     // Here we remove a shape that was created when the note was first pressed.
+    // WARNING: looping through the C array like that or via using sizeof work only if it was statically declared or declared in the same scope,
+    // otherwise the length of an array will be unknown and the loop will only iterate over the first element. So dont pass arrays as arguments.
     for (auto shape : shapes)
     {
-        // WARNING: looping through the C array like that or via using sizeof work only if it was statically declared or declared in the same scope,
-        // otherwise the length of an array will be unknown and the loop will only iterate over the first element. So dont pass arrays as arguments.
         if (shape.getNote() == note && shape.isActive())
         {
             shape.fadeOut();
