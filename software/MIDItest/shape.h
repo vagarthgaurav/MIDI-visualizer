@@ -4,11 +4,6 @@
 #include "Arduino.h"
 #include "types.h"
 
-enum ShapeType
-{
-    COLUMN
-};
-
 // Using inheritance sounds like a bad idea since we have to preallocate everything and cant use "new".
 // So instead this class will handle every type of a displayed shape we might want to implement
 class Shape
@@ -18,14 +13,7 @@ public:
 
     // These are global configs affecting all the shapes, not only this specific instance
     // keeping them global saves memory.
-    static ShapeType sType;
-    static float sFadeInDuration;
-    static float sFadeInStartScaleMult;
-    static float sFadeOutDuration;
-    static float sFadeOutEndScaleMult;
-    static float sPulsePeriod;
-    static float sPulseOpacityLowMult;
-    static float sPulseHueRotationLowDeg;
+    static ShapeConfig sConfig;
     ////////////////////////////////////////////////////////////////////////////////////
 
     void init(RelPosition position, float width, Color color, byte note)
@@ -71,7 +59,7 @@ public:
     {
         // Different shape types can be implemented here
         // Given pixel screen position (in 0 - 1) what is a color of this pixel if it's within this Shape?
-        if (sType == ShapeType::COLUMN)
+        if (sConfig.type == ShapeType::COLUMN)
         {
             // Can probably fade out the edges instead of abruptly cutting them
             if (relPos.x >= mPosition.x - mWidth / 2 && relPos.x <= mPosition.x + mWidth / 2)
@@ -109,13 +97,6 @@ private:
 };
 
 // Apparently we need to define those statics here as well, or everything breaks.
-ShapeType Shape::sType;
-float Shape::sFadeInDuration;
-float Shape::sFadeInStartScaleMult;
-float Shape::sFadeOutDuration;
-float Shape::sFadeOutEndScaleMult;
-float Shape::sPulsePeriod;
-float Shape::sPulseOpacityLowMult;
-float Shape::sPulseHueRotationLowDeg;
+ShapeConfig Shape::sConfig;
 
 #endif

@@ -44,16 +44,18 @@ void setup()
     Serial.println("Listening to note events...");
 
     // Setting up shape animations config, so far these settings do absolutely nothing :)
-    // We can change animation behaviour by altering these settings.
-    // TO DO: Store all of these in a single config struct so config presets can be easily swapped.
-    Shape::sType = ShapeType::COLUMN;
-    Shape::sFadeInDuration = 0.3;
-    Shape::sFadeInStartScaleMult = 1.5;
-    Shape::sFadeOutDuration = 0.3;
-    Shape::sFadeOutEndScaleMult = 1.5;
-    Shape::sPulsePeriod = 1.0;
-    Shape::sPulseOpacityLowMult = 0.75;
-    Shape::sPulseHueRotationLowDeg = 25;
+    // We can change shapes and behaviour by swapping ShapeConfigs.
+    ShapeConfig config = {
+        .type = ShapeType::COLUMN,
+        .fadeInDuration = 0.3,
+        .fadeInStartScaleMult = 1.5,
+        .fadeOutDuration = 0.3,
+        .fadeOutEndScaleMult = 1.5,
+        .pulsePeriod = 1.0,
+        .pulseOpacityLowMult = 0.75,
+        .pulseHueRotationLowDeg = 25};
+
+    Shape::sConfig = config;
 }
 
 void handleNoteOn(byte channel, byte note, byte velocity)

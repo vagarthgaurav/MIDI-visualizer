@@ -21,4 +21,21 @@ struct AbsPosition
     int y;
 };
 
+enum ShapeType
+{
+    COLUMN
+};
+
+struct ShapeConfig
+{
+    ShapeType type;
+    float fadeInDuration;
+    float fadeInStartScaleMult;
+    float fadeOutDuration;
+    float fadeOutEndScaleMult;
+    float pulsePeriod;
+    float pulseOpacityLowMult;
+    float pulseHueRotationLowDeg;
+};
+
 #endif
