@@ -25,6 +25,28 @@ public:
         }
     }
 
+    void forEach(Color (*fn)(const AbsPosition &absPos, const RelPosition &relPos))
+    {
+        // Reset all pixels
+
+        // Loop through pixels and set their colors
+        int total = mRows * mColumns;
+        for (int i = 0; i < total; i++)
+        {
+            mLedIndices[i];
+            auto aPos = indexToAbsPosition(i);
+            auto rPos = absToRelPosition(aPos);
+            // TO DO: We dont really need ledInd here, but rather and x and y coordinates in 0 - 1.0 range. I.e same as shape Position struct.
+            auto pixelColor = fn(aPos, rPos);
+            setPixel(aPos, pixelColor);
+        }
+    }
+
+private:
+    int mRows;
+    int mColumns;
+    int mLedIndices[1000];
+
     void setPixel(const AbsPosition &absPos, Color col)
     {
         int ledInd = absPositionToIndex(absPos);
@@ -62,23 +84,5 @@ public:
     {
         auto i = mLedIndices[position.y * mColumns + position.x];
     }
-
-    void forEach(void (*fn)(const AbsPosition &absPos, const RelPosition &relPos))
-    {
-        int total = mRows * mColumns;
-        for (int i = 0; i < total; i++)
-        {
-            mLedIndices[i];
-            auto aPos = indexToAbsPosition(i);
-            auto rPos = absToRelPosition(aPos);
-            // TO DO: We dont really need ledInd here, but rather and x and y coordinates in 0 - 1.0 range. I.e same as shape Position struct.
-            fn(aPos, rPos);
-        }
-    }
-
-private:
-    int mRows;
-    int mColumns;
-    int mLedIndices[1000];
 };
 #endif

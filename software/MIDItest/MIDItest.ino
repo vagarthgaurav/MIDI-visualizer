@@ -31,6 +31,31 @@ float noteToFraction(byte note)
 }
 ////////////////////////////////////////
 
+void setup()
+{
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    Serial.begin(115200);
+    Serial.println("Arduino says Hi!");
+
+    // Listening to MIDI events
+    MIDI.begin(MIDI_CHANNEL_OMNI);
+    MIDI.setHandleNoteOn(handleNoteOn);
+    MIDI.setHandleNoteOff(handleNoteOff);
+    Serial.println("Listening to note events...");
+
+    // Setting up shape animations config, so far these settings do absolutely nothing :)
+    // We can change animation behaviour by altering these settings.
+    Shape::sType = ShapeType::COLUMN;
+    Shape::sFadeInDuration = 0.3;
+    Shape::sFadeInStartScaleMult = 1.5;
+    Shape::sFadeOutDuration = 0.3;
+    Shape::sFadeOutEndScaleMult = 1.5;
+    Shape::sPulsePeriod = 1.0;
+    Shape::sPulseOpacityLowMult = 0.75;
+    Shape::sPulseHueRotationLowDeg = 25;
+}
+
 void handleNoteOn(byte channel, byte note, byte velocity)
 {
     // Velocity range is 1 - 127
@@ -88,31 +113,6 @@ void handleNoteOff(byte channel, byte note, byte velocity)
     digitalWrite(LED_BUILTIN, LOW);
 }
 
-void setup()
-{
-    pinMode(LED_BUILTIN, OUTPUT);
-
-    Serial.begin(115200);
-    Serial.println("Arduino says Hi!");
-
-    // Listening to MIDI events
-    MIDI.begin(MIDI_CHANNEL_OMNI);
-    MIDI.setHandleNoteOn(handleNoteOn);
-    MIDI.setHandleNoteOff(handleNoteOff);
-    Serial.println("Listening to note events...");
-
-    // Setting up shape animations config, so far these settings do absolutely nothing :)
-    // We can change animation behaviour by altering these settings.
-    Shape::sType = ShapeType::COLUMN;
-    Shape::sFadeInDuration = 0.3;
-    Shape::sFadeInStartScaleMult = 1.5;
-    Shape::sFadeOutDuration = 0.3;
-    Shape::sFadeOutEndScaleMult = 1.5;
-    Shape::sPulsePeriod = 1.0;
-    Shape::sPulseOpacityLowMult = 0.75;
-    Shape::sPulseHueRotationLowDeg = 25;
-}
-
 void loop()
 {
     // Need to keep this read() in a loop, otherwise events wont trigger
@@ -134,6 +134,17 @@ void loop()
     }
 
     // Loop through all of the screen pixels and sample all of the objects from each pixel. Mix colors (if pixel belongs to multiple objects), set pixel color.
-    screen.forEach([](const AbsPosition &absPos, const RelPosition &relPos)
-                   { Serial.print(relPos.x); Serial.print(" "); Serial.println(relPos.y); });
+    screen.forEach(pixelBrain);
+}
+
+Color pixelBrain(const AbsPosition &absPos, const RelPosition &relPos)
+{
+    Serial.print(relPos.x);
+    Serial.print(" ");
+    Serial.println(relPos.y);
+
+    // TO DO: Sample colors from every object (Hope arduino will be able to handle that), mix colors.
+
+    // Return pixel color
+    return {0, 0, 0, 0};
 }
