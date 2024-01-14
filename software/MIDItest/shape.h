@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "types.h"
+#include <Deneyap_RenkDonusturme.h>
 
 // Using inheritance sounds like a bad idea since we have to preallocate everything and cant use "new".
 // So instead this class will handle every type of a displayed shape we might want to implement
@@ -16,10 +17,11 @@ public:
     static ShapeConfig sConfig;
     ////////////////////////////////////////////////////////////////////////////////////
 
-    void init(RelPosition position, float width, Color color, byte note)
+    void init(RelPosition position, float width, Color color, byte note, unsigned long *now)
     {
         // Revitalise and display the object
-        mAnchorTime = millis();
+        mNow = now;
+        mAnchorTime = *now;
         mActive = true;
         mFadingIn = true;
         mFadingOut = false;
@@ -28,30 +30,48 @@ public:
         mPosition = position;
         mWidth = width;
         mColor = color;
+        originalAlpha = color.a;
     }
 
     void fadeOut()
     {
         // Start fade out animation
-        mAnchorTime = millis();
+        // Serial.print("Fading out at timepoint ");
+        // Serial.println(*mNow);
+        mAnchorTime = *mNow;
         mFadingIn = false;
         mFadingOut = true;
     }
 
     void update(unsigned long dt)
     {
-        // Note: dt is in milliseconds here
         // Runs every update, responsible for animating object properties
+        if (!mActive)
+            return;
+
+        // Checking if its time to fade out
+        float dif = (*mNow - mAnchorTime) / 1000.0f;
+        if (!mFadingOut && dif >= sConfig.lifeTime)
+        {
+            fadeOut();
+            return;
+        }
+
+        // Are we done fading out?
         if (mFadingOut)
         {
-            // Not animating anything for now, merely short-circuiting
-            mColor.r = 0;
-            mColor.g = 0;
-            mColor.b = 0;
-            mColor.a = 0;
+            auto progress = dif / sConfig.fadeOutDuration;
 
-            mActive = false;
-            mFadingOut = false;
+            if (progress >= 1.0f)
+                progress = 1.0f;
+
+            mColor.a = (1 - progress) * originalAlpha;
+
+            if (dif > sConfig.fadeOutDuration)
+            {
+                mActive = false;
+                mFadingOut = false;
+            }
         }
     }
 
@@ -63,7 +83,10 @@ public:
         {
             // Can probably fade out the edges instead of abruptly cutting them
             if (relPos.x >= mPosition.x - mWidth / 2 && relPos.x <= mPosition.x + mWidth / 2)
+            {
                 return mColor;
+            }
+
             else
                 return {0, 0, 0, 0};
         }
@@ -82,11 +105,13 @@ public:
 
 private:
     byte mNote;
+    unsigned long *mNow;
 
     // This is used to save start timestamp for both fadeIn and fadeOut animation.
     unsigned long mAnchorTime;
 
     Color mColor;
+    byte originalAlpha;
 
     RelPosition mPosition;
     float mWidth;

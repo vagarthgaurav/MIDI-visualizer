@@ -2,15 +2,17 @@
 #define Screen_h
 
 #include "types.h"
+#include <Adafruit_NeoPixel.h>
 
 class Screen
 {
 public:
-    Screen(int rows, int columns, int skip)
+    Screen(int rows, int columns, int skip, Adafruit_NeoPixel *pixels)
     {
         mRows = rows;
         mColumns = columns;
         mSkip = skip;
+        mPixels = pixels;
     }
 
     void perPixelUpdate(Color (*fn)(const AbsPosition &absPos, const RelPosition &relPos))
@@ -32,7 +34,9 @@ public:
                 RelPosition relPos = absToRelPosition(absPos);
 
                 auto pixelColor = fn(absPos, relPos);
-                setPixel(ledInd, pixelColor);
+                // setPixel(ledInd, pixelColor);
+                float alpha = (float)pixelColor.a / 255.0f;
+                mPixels->setPixelColor(ledInd, mPixels->Color(pixelColor.r * alpha, pixelColor.g * alpha, pixelColor.b * alpha));
 
                 ledInd++;
             }
@@ -42,9 +46,10 @@ public:
     }
 
 private:
-    int mRows;
     int mColumns;
     int mSkip;
+    int mRows;
+    Adafruit_NeoPixel *mPixels;
 
     void setPixel(int ledInd, Color col)
     {

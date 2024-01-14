@@ -1,6 +1,13 @@
 #ifndef types_h
 #define types_h
 
+struct HSLColor
+{
+    double h;
+    double s;
+    double l;
+};
+
 struct Color
 {
     byte r;
@@ -30,12 +37,9 @@ struct ShapeConfig
 {
     ShapeType type;
     float fadeInDuration;
-    float fadeInStartScaleMult;
+    float lifeTime;
     float fadeOutDuration;
-    float fadeOutEndScaleMult;
-    float pulsePeriod;
-    float pulseOpacityLowMult;
-    float pulseHueRotationLowDeg;
+    float hueRotationVelocity;
 };
 
 #endif
