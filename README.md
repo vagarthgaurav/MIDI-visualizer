@@ -36,12 +36,12 @@ And finally Chapter 4 will discuss a viability of the aproach and potential impr
 ### 2.1	Concept development
 The initial concept was outlined in the following diagram:
 
-![alt text](resources/block_diagram.jpeg "Block Diagram")
+![Block Diagram](resources/block_diagram.jpeg)
 A block diagram of an initial idea.
 
 And the following MIDI schematic depicting a MIDI input and throughput isolated from the process control block (PCB) circuit via an opto-coupler.
 
-![alt text](resources/midi_schematic_ref2.gif "Block Diagram")
+![Schematic](resources/midi_schematic_ref2.gif)
 Isolated MIDI IN and THRU.
 (C) 1985 MIDI Manufacturers Association via https://diyaudiocircuits.com/midi-buffer/
 
@@ -60,14 +60,52 @@ From these the an idea of core circuit elements crystalised:
 
 The circuit was designed in KiCad
 
-SMD components vere selected wherever possible (ADD INFO ON PACKAGE SIZE?) for their compact size and as a personal opportunity to discover SMD PCB manufacturing process.
+SMD components were selected wherever possible (ADD INFO ON PACKAGE SIZE?) for their compact size and as a personal opportunity to discover SMD PCB manufacturing process.
 As a voltage regulator - buck convertor was used due to the high efficiency in comparison to archaic linear voltage regulators.
 
-FURTHER CIRCUIT DETAILS
+#### 2.2.1 Power regulator
+
+![Power regulator](resources/Power_regulator.png)
+Power regulator circuit
+
+The device uses a buck converter to convert 12V to 5V necessary to power the MCU and other IC’s. The device used is ADP2303ARDZ-5.0 from Analog devices. The circuit was designed in accordance with the typical application circuit from the datasheet. [1] 
+
+
+#### 2.2.2 Microcontroller and crytal circuitry
+
+![Microcontroller](resources/MCU.png)
+
+Microcontroller and crytal circuitry
+
+The microcontroller chosen is an ATmega328p-au. As the datasheet [2] suggests the MCU requires a 16Mhz clock crystal. The MCU has associated decoupling capacitors of 1uF and a bulk decoupling capacitor of 10uF. The MIDI input signal is read in by the MCU at Pin PD5. The output for the LED data pin is assigned to Pin PB0. 
+
+Prior to soldering the IC to the PCB the Arduino bootloader was uploaded with the use of a TQFP32 breakout board. This was necessary as an error in design was made of not including a ISP header for programming. The Arduino bootloader can only be uploaded with the MCU’s ISP pins. 
+
+The programme is uploaded to the PCB once it is completed with the help of an FTDI programmer. The PCB has pins broken out for plugging a programmer. 
+
+
+#### 2.2.3 MIDI input
+
+![MIDI Input](resources/Midi_input.png)
+
+MIDI Input circuit
+
+The MIDI signal is read in with the use of a MIDI socket. The signal is fed into an optocoupler for galvanic isolation to prevent ground loops. The signal then goes to the MCU for processing. 
+
+#### 2.2.4 MIDI Thru
+
+![MIDI Thru](resources/Midi_thru.png)
+
+MIDI thru circuit
+
+The MIDI thru circuit is fairly simple. A hex inverter IC is used with the signal passed through 2 inverters. This acts as a buffer for delivering a stable signal. 
+
 
 ### 2.3	Prototyping
 
-A BIT ABOUT THOSE FEW PROTOTYPING ATTEMPTS WE MADE
+The MIDI input circuitry was prototyped with a breadboard for a prrof of concept. The circuit is the exact same as in the schematic with THT components. As expected the MIDI signal was successfully read. An arduino uno was used to read and process the signal. 
+
+The power regulator circuit was also to be prototyped but unfortnately the ADP2303 is not available in a THT package and was threfore not possible. Nonetheless since the Datasheet was very thorough and was implmented exactly according to specification this turned out to not be necessary afterall. The power regulator in the final PCB output a steady 5V output as expected. 
 
 ### 2.4	Printing
 
@@ -80,6 +118,7 @@ Unfortunately, but not unexpectedly, due to the small width of SMD pads and trac
 ### 2.5 Soldering
 
 Soldering pipeline used involved a carefull application of a limited amount of soldering paste to component pads using soldering paste pump, followed by a precise placement of SMD components using magnetic pick-and-place machine. Afterwards, PCB was placed in a reflow oven which melted the paste effectively soldering the components in place. Initial attempt was not ideal, MCU came out of the oven with multiple pins short-circuited with melted solder. A cleanup attempt employing soldering iron and a solder braid succeeded only partially. It was decided to desolder the MCU using the heatgun in the process of which the first PCB was destroyed.
+
 PCB soldering was started from scratch using a fresh PCB and a new set of components, same process was repeated, yet second bake resulted in a resounding success with no short-circuits.
 
 Following that thru-hole components (THC), such as MIDI ports, power jack and connector pins - were soldered. Subsequent connectivity tests showed that hardware functions as expected and opened a road ahead to software development and testing.
@@ -123,11 +162,14 @@ Example how to draw a table:
 
 
 ## 5	Results
-Here you should present your results.
 
-This is an example how to include image:
-![alt text](resources/Open_Source_Hardware_(OSHW)_Logo_on_blank_PCB.jpg "Example Image")
-(C) Altzone, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons
+The final assembled PCB worked as intended. Uploading code with the FTDI programmer was successful. The MIDI signal was successfully read and processed by the MCU and the LED strip was illuminated with the correct animation. 
+
+The only flaw in the design was the absence of a ISP header pins. This was crucial as the arduino bootloader could not be installed on the MCU. As explained above an attempt was made to desolder the IC and to use a TQFP32 breakout board and to upload the bootloader. Unfortunately the PCB and the MCU were damaged and had to start over with a fresh PCB.
+
+![Midi visualiser final PCB](resources/Midi_visualiser.jpeg)
+
+The final PCB
 
 
 ## 6	Discussion
@@ -143,8 +185,8 @@ ERGONOMICS? A printed case for LED screen with a despersing screen? Clamping the
 
 ## 8	References
 
-* [1]
-* [2] 
+* [1] ADP2303 Datasheet - https://www.analog.com/media/en/technical-documentation/data-sheets/adp2302_2303.pdf
+* [2] ATmega328p-au datasheet - https://www.mouser.de/datasheet/2/268/ATmega48A_PA_88A_PA_168A_PA_328_P_DS_DS40002061B-3050139.pdf
 
 ## 9	Appendices
 
