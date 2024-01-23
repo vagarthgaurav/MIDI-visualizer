@@ -47,7 +47,7 @@ The following MIDI schematic depicts MIDI input and throughput isolated from the
 Isolated MIDI IN and THRU.
 (C) 1985 MIDI Manufacturers Association via https://diyaudiocircuits.com/midi-buffer/
 
-Additionally; we already had a 12V 5A power source in our possession, so it was decided to design the solution around that power input.
+Additionally, we already had a 12V 5A power source in our possession, so it was decided to design the solution around that power input.
 
 From these, an idea of core circuit elements crystallized:
 - A voltage regulator that can efficiently step down from 12V to 5V.
