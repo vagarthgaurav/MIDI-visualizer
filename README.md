@@ -43,6 +43,7 @@ A block diagram of an initial idea.
 The following MIDI schematic depicts MIDI input and throughput isolated from the process control block (PCB) circuit via an opto-coupler.
 
 ![Schematic](resources/midi_schematic_ref2.gif)
+
 Isolated MIDI IN and THRU.
 (C) 1985 MIDI Manufacturers Association via https://diyaudiocircuits.com/midi-buffer/
 
