@@ -167,21 +167,32 @@ The final assembled PCB worked as intended. Uploading code with the FTDI program
 
 The only flaw in the design was the absence of a ISP header pins. This was crucial as the arduino bootloader could not be installed on the MCU. As explained above an attempt was made to desolder the IC and to use a TQFP32 breakout board and to upload the bootloader. Unfortunately the PCB and the MCU were damaged and had to start over with a fresh PCB.
 
+The second attempt was successful and the PCB performed as intended.
+
 ![Midi visualiser final PCB](resources/Midi_visualiser.jpeg)
 
 The final PCB
 
-
 ## 6	Discussion
-SLOW CODE CAN BE OPTIMISED, but otherwise everything is pretty much as expected?
-Software serial should be changed to hardware serial.
-Maybe mention the overall cost here?
 
+The goal of this project was to bringup a PCB that could decode a MIDI signal from an instrument and be able to play an animation on a Neopixel LED display. With this in mind the project was a success. 
+
+A few things that could have beem optimised. The first being the use of Hardware serial instead of Software Serial. Software serial does not have sufficient speed and in consequence dropped some of the MIDI messages. This could have been avoided by using HardwareSerial. Unfortunately the Atmega328p-au has only one Serial port, which was already used for programming. Secondly the code could have been optimised a lot. The current code unfortunately does not perform very well on the Atmega328p. The idea was for the code to be as robust as possible to be able to handle an LED display of any length. This proved to be too much for the MCU to handle. Code optimisation can improve the usablity a lot. Third and final room for improvement is upgrade the MCU entirely and use something that is faster and has a lot more RAM. An STM32 chip would be a massive improvement. An added benfit is more number of Serial ports. 
+
+A comment on the issue of not including a ISP programming header as already mentioned before. The absence of which was a major downside, which was eventually solved but would have saved a lot of time and effort and would have added a robustness to the board. In future designs the inclusion of ISP headers as well as a hardware debug port such as Serial wire debug would provide for a much more comfortable experience. 
+
+The design was able to achieve all the requirements and functioned with only minor deficiencies that are easily fixable in a future iteration. 
+
+Finally the cost of the PCB was below the estimated €20 limit. Using only minimal components and allocating more budget to the most important parts worked out to a board that is capable of enhancing the music playing experience for less than €20. 
 
 ## 7	Concluding Comments
 You might want to discuss possible future work here
 
 ERGONOMICS? A printed case for LED screen with a despersing screen? Clamping the whole contraption to the MIDI keyboard?
+
+A future iteration of this design would certianly include the above mentioned improvements as well as a few more user experience enhancing aspects. A 3D printable case to fit the board would help in protecting the baord. An Onboard LED array would be an added benefit that could make the device function independently without the need for an external LED strip display. A seamless switching between the onboard and external display by detecting if a display is plugged in would make the device a well rounded product. 
+
+The experience of going through project was a very enjoyable and rewarding. The opportunity to learn was immense and the knowledge gained from this can be certainly applied to future projects.
 
 ## 8	References
 
