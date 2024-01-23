@@ -1,33 +1,19 @@
->>>
-**Project-Template**
+# MIDI Visualiser
 
-Please use this template for your practical electronics project. (feel free to delete this section) 
-
-You can find a quick guide in the following [cheat sheet](https://www.markdownguide.org/cheat-sheet/) or specific [gitlab style](https://docs.gitlab.com/ee/user/markdown.html) here
-
->>>
-
-**Make sure your submit your deliverables (project description, schematic, pcb design and report on time - timestamp is used as reference)
-
-
-----
-
-# Title of the project
-
-by: *Names of the authors*
+by: Vagarth Gaurav and Maksim Eremenko
 
 
 **Faculty of Technology and Bionics**
 
 ***Rhine-Waal University of Applied Sciences***
 
-Date: XX January 2022
+Date: 23 January 2024
 
 ----
 
 ## Abstract
 
-The MIDI Visualiser is an attempt at enhancing auditory musical stimulation with a visual stimuli corresponding to the played notes. It implements an overarching idea of showing visual patterns on a rudimentary screen made of smart light-emitting diode (LED) strips based on the Musical Instrument Digital Interface (MIDI) keyboard output. The board design includes a buck-converter that steps down the power input voltage from 12v to 5v for the ATmega micro controller unit (MCU), while also feeding the 12v to LED strips. MCU receives a MIDI input through a software serial, processes it and sends an output signal controlling an LED strip to display different patterns based on the pressed key. Out of curious ambition - prevalently SMD components were used, which ultimately led to a failed attempt to print at Hochschule Rhein-Waal (HSRW), instead the PCB was ordered from a third party. After arduous soldering, resoldering, coding and debugging the concept prooved to be feasible. Although the prototype is working - further code optimisation is necessary and additional ergonomic improvements should be considered.
+The MIDI Visualiser implements an overarching idea of showing visual patterns on a rudimentary screen made of smart light-emitting diode (LED) strips based on the Musical Instrument Digital Interface (MIDI) keyboard output. The board design includes a buck-converter that steps down the power input voltage from 12v to 5v for the ATmega micro controller unit (MCU), while also feeding the 12v to LED strips. MCU receives a MIDI input through a software serial, processes it and sends an output signal controlling an LED strip to display different patterns based on the pressed key. Out of curious ambition - prevalently SMD components were used, which ultimately led to a failed attempt to print at Hochschule Rhein-Waal (HSRW), instead the PCB was ordered from a third party. After arduous soldering, resoldering, coding and debugging the concept prooved to be feasible. Although the prototype is working - further code optimisation is necessary and additional ergonomic improvements should be considered.
 
 ## Table of Contents
 
