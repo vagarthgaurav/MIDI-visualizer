@@ -86,6 +86,25 @@ Following that thru-hole components (THC), such as MIDI ports, power jack and co
 
 ### 2.6 Software
 
+Software was written using Arduino IDE as well as Visual Studio Code with an Arduino plugin.
+The core idea behind the software was inspired by a style of image rendering employed by graphics processing unit (GPU) shaders. The software implements multiple crucial concepts:
+- A screen, where every pixel is an LED adressable by an x and y coordinate.
+- A shape that can have a specific size, position and color.
+- A screen pixel that can sample every existing shape to determine it's own color, potentially as a blend of colors of intersecting shapes.
+
+Following libraries were used:
+
+Every main loop iteration - each screen pixel attempts to sample every existing shape, mix the colors of all the shapes it belong to (if any) and based on that conclude it's own color:
+
+At the same time, MIDI input is listened to and in an event of a key press or release - new shape is created or removed based on the note value in a way that leftmost keys generate shapes in the leftmost part of the screen, while rightmost - in the rightmost. The shape was meant to quickly fade in and gradually fade out when the key is released, although this aproach was later altered.
+
+The downside of this aproach: slow code
+
+Additionally - the research suggests that due to limitations of ATmega memory - dynamic memory management is highly undesirable due to possible rapid memory fragmentation leading to an inevitable silent crash. In response to that - everything, including shape instance was preallocated, but due to limited amount of memory (2kb) the hard limit of 30 simultaneous shapes on the screen was introduced.
+
+Throughout the implementation testing it became obvious that some of the MIDI events are simply missing. Through the following process of research and debugging it was discovered that the culprit migh've been an initial ignorant decision to use a software serial pin instead of the hardware serial one, it appears that in a former case some serial signals can be lost when MCU is busy with other work. 
+If a shape dissapearance depends of a MIDI note-off signal - then if such signal went missing - shape will linger, which is visually noticeably and undoubtly undesirable. Since we had no ability to reroute the MIDI trace to hardware serial pin - the issue was worked around on the software side by listening only to note-on events that spawn the shape and fading out the shape after a set amount of time, this way it was possible to trade noticeably false positives for less notiseable false negatives.
+
 This is an example how to include code snippet:
 ```python
 def function():
@@ -113,6 +132,7 @@ This is an example how to include image:
 
 ## 6	Discussion
 SLOW CODE CAN BE OPTIMISED, but otherwise everything is pretty much as expected?
+Software serial should be changed to hardware serial.
 Maybe mention the overall cost here?
 
 
