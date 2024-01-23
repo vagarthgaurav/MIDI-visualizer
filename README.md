@@ -112,12 +112,14 @@ This is an example how to include image:
 
 
 ## 6	Discussion
-Here you should discuss your results
+SLOW CODE CAN BE OPTIMISED, but otherwise everything is pretty much as expected?
+Maybe mention the overall cost here?
 
-Can mention ergonomics here, that a case for LED screen with a despersing shield can be made and maybe that case can also have pcb embeded and maybe all of that can be clamped onto the MIDI keyboard.
 
 ## 7	Concluding Comments
 You might want to discuss possible future work here
+
+ERGONOMICS? A printed case for LED screen with a despersing screen? Clamping the whole contraption to the MIDI keyboard?
 
 ## 8	References
 
