@@ -62,7 +62,7 @@ From these, an idea of core circuit elements crystallized:
 
 The circuit was designed in KiCad
 
-SMD components were selected wherever possible (ADD INFO ON PACKAGE SIZE?) for their compact size and as a personal opportunity to discover SMD PCB manufacturing process.
+SMD components were selected wherever possible for their compact size and as a personal opportunity to discover SMD PCB manufacturing process.
 As a voltage regulator - a buck convertor was used due to its high efficiency in comparison to archaic linear voltage regulators.
 
 #### 2.2.1 Power regulator
