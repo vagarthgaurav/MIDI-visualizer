@@ -15,9 +15,6 @@ Date: 23 January 2024
 
 The MIDI Visualiser implements an overarching idea of showing visual patterns on a rudimentary screen made of smart light-emitting diode (LED) strips based on the Musical Instrument Digital Interface (MIDI) keyboard output. The board design includes a buck-converter that steps down the power input voltage from 12v to 5v for the ATmega microcontroller unit (MCU), while also feeding the 12v to LED strips. MCU receives a MIDI input through a software serial, processes it and sends an output signal controlling an LED strip to display different patterns based on the pressed key. Out of curious ambition - prevalently SMD components were used, which ultimately led to a failed attempt to print at Hochschule Rhein-Waal (HSRW), instead the PCB was ordered from a third party. After arduous soldering, resoldering, coding and debugging the concept proved to be feasible. Although the prototype is working - further code optimization is necessary and additional ergonomic improvements should be considered.
 
-## Table of Contents
-
-[[_TOC_]]
 
 ## 1 Introduction
 
